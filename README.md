@@ -7,7 +7,7 @@ TwinAero is a 100% open-source, Docker-enabled, AI-native digital twin platform 
 ## 🚀 High-Level Architecture & Stack
 
 ```
-![TwinAero Architecture](./snapshots/hl.jpg)
+![TwinAero Architecture](./snapshots/hl.png)
 ```
 
 ### Core Technology Stack
