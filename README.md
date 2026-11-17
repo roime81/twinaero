@@ -7,7 +7,44 @@ TwinAero is a 100% open-source, Docker-enabled, AI-native digital twin platform 
 ## 🚀 High-Level Architecture & Stack
 
 ```
-![Uploading image.png…]()
+## 🚀 High-Level Architecture
+
+```mermaid
+graph TD
+    %% Define Styles
+    classDef ui fill:#e1f5fe,stroke:#01579b,stroke-width:2px,rounded:true;
+    classDef kafka fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    classDef db fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef ai fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+    classDef ext fill:#f5f5f5,stroke:#616161,stroke-width:1px;
+
+    %% Nodes
+    UI[Live Operational Interface / Streamlit Dashboard]:::ui
+    
+    subgraph Ingestion ["Data Ingestion & Streaming Mesh"]
+        Ext[Partner Airlines, OEM, FIDS, Banks, Rail]:::ext
+        Kafka[Apache Kafka Event Mesh]:::kafka
+    end
+
+    subgraph Persistence ["Data Persistence & State Engine"]
+        Timescale[TimescaleDB - Time-Series]:::db
+        Redis[Redis / Valkey - Cache]:::db
+    end
+
+    subgraph Agents ["AI Agentic & Inference Layer"]
+        Crew[CrewAI / LangGraph Agents]:::ai
+        MCP[MCP Aviation Connectors]:::ai
+        Ollama[Ollama / Local Private LLM]:::ai
+    end
+
+    %% Flow / Connections
+    UI -->|API Gateway| Crew
+    Ext -->|Telemetry / Events| Kafka
+    Kafka -->|Stream Consumer| Timescale
+    Crew -->|Tool Calls| MCP
+    MCP -->|Query State| Timescale
+    Crew -->|Inference| Ollama
+    Timescale -.->|State Feed| UI
 
 ```
 
