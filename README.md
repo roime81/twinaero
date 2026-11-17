@@ -7,25 +7,7 @@ TwinAero is a 100% open-source, Docker-enabled, AI-native digital twin platform 
 ## 🚀 High-Level Architecture & Stack
 
 ```
-[ Frontend: Streamlit / React Dashboard ]
-                     │
-                     ▼
-       [ API Gateway / Langfuse Observability ]
-                     │
-     ┌───────────────┴───────────────┐
-     ▼                               ▼
-[ Agentic Engine ]            [ Digital Twin State Engine ]
-(CrewAI / LangGraph)           (TimescaleDB + PostGIS + Redis)
-     │                               │
-     ├───────────────┬───────────────┘
-     ▼               ▼
-[ MCP Servers ]   [ Streaming Event Mesh ]
-(Aviation APIs)   (Apache Kafka Topics)
-     │
-     ├───────────────┐
-     ▼               ▼
-[ Private LLMs ] [ Public LLMs ]
-  (Ollama / vLLM)  (OpenAI / Anthropic)
+![TwinAero Architecture](./snapshots/hl.jpg)
 ```
 
 ### Core Technology Stack
